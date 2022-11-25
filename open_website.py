@@ -1,4 +1,12 @@
+from os.path import isfile
 import webbrowser as wb
+
+def check_file_exists(path: str) -> bool:
+    if isfile(path):
+        print("The file exists")
+        return True
+    else:
+        return False
 
 # Display url using the default browser
 url = 'https://www.codebreakthrough.com/python-bootcamp/'
