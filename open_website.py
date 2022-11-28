@@ -28,7 +28,7 @@ class OpenWebsitesWithFile :
 
     def set_choice(self, new_choice):
         self.choice = new_choice
-        
+
 def check_file_exists(path: str, filename: str) -> bool:
     """
     Check if a file with its local path exists
@@ -58,6 +58,42 @@ def read_tsv_websites_file(path: str, filename : str) -> pd.DataFrame:
     file = f"{path}/{filename}"
     return pd.read_csv(file, sep='\t', header = None, names=['Goal', 'Name', 'Url'])
 
+def select_choice(df : pd.DataFrame, choice : str) -> pd.DataFrame :
+    """
+    Return only rows that matches the given choice in the DataFrame
+
+    Args:
+        df (pd.DataFrame): DataFrame containing all values in the tsv file
+        choice (str): str name in the first column of the DataFrame
+
+    Returns:
+        pd.DataFrame: DataFrame containing only values with name choice 
+    """
+    return df.loc[df["Goal"] == choice]
+
+def dataframe_to_list(df : pd.DataFrame) -> list:
+    """
+    Return a list of all urls wanted
+
+    Args:
+        df (pd.DataFrame): DataFrame containing only values with name choice
+
+    Returns:
+        list: list of all urls wanted
+    """
+    df_right_urls = df['Url']
+    return df_right_urls.tolist()
+
+def open_urls_websites(urls_list : list):
+    """
+    Open websites thanks to the urls list
+
+    Args:
+        urls_list (list): list of urls wanted
+    """
+    for url in urls_list:
+        wb.open(url)
+
 # Display url using the default browser
 # url = 'https://www.codebreakthrough.com/python-bootcamp/'
 # wb.open(url)
@@ -69,37 +105,14 @@ def read_tsv_websites_file(path: str, filename : str) -> pd.DataFrame:
 # wb.get('firefox').open_new_tab(url)
 
 def main(path, filename, choice):
-    tsv_file = OpenWebsitesWithFile(path, filename, choice)
-    if check_file_exists(tsv_file.get_path(), tsv_file.get_filename()):
-        df = read_tsv_websites_file(tsv_file.get_path(), tsv_file.get_filename())
-    df_rows = df.loc[df["Goal"] == choice]
-    df_right_urls = df_rows['Url']
-    url_list = df_right_urls.tolist()
-    for url in url_list:
-        wb.open(url)
-
-    
-
+    op_web = OpenWebsitesWithFile(path, filename, choice)
+    if check_file_exists(op_web.get_path(), op_web.get_filename()):
+        df = read_tsv_websites_file(op_web.get_path(), op_web.get_filename())
+    df_rows = select_choice(df, op_web.get_choice())
+    urls_choice_list = dataframe_to_list(df_rows)
+    open_urls_websites(urls_choice_list)
 
 if __name__ == "__main__":
     args = construct_parameters()
     main(args.path, args.filename, args.choice)
-    # TEST
-    # PATH = "/home/jacky/projects/OpenWebsitesInterest/"
-    # ERROR_PATH = ""
-    # ERROR_PATH2 = "/home/jacky/projects/"
-    # FILENAME = "list_websites.txt"
-    # ERROR_FILENAME = ""
-    # ERROR_FILENAME2 = "notexistfile.txt"
-    # good_variables = OpenWebsitesWithFile(PATH, FILENAME)
-    # err_variables = OpenWebsitesWithFile(PATH, ERROR_FILENAME)
-    # err2_variables = OpenWebsitesWithFile(PATH, ERROR_FILENAME2)
-    # err3_variables = OpenWebsitesWithFile(ERROR_PATH, FILENAME)
-    # err4_variables = OpenWebsitesWithFile(ERROR_PATH2, FILENAME)
-    # err5_variables = OpenWebsitesWithFile(ERROR_PATH, ERROR_FILENAME)
-    # err6_variables = OpenWebsitesWithFile(ERROR_PATH, ERROR_FILENAME2)
-    # err7_variables = OpenWebsitesWithFile(ERROR_PATH2, ERROR_FILENAME)
-    # err8_variables = OpenWebsitesWithFile(ERROR_PATH2, ERROR_FILENAME2)
-    # print(check_file_exists(good_variables.get_path(), good_variables.get_filename()))
-    # print(check_file_exists(err_variables.get_path(), err_variables.get_filename()))
     
