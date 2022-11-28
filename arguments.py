@@ -19,6 +19,7 @@ def help_msg():
         
         [-p (required): Path to the tsv file (with 3 columns).]
         [-f (required): Name of the tsv file.]
+        [-c (required): Choice of the Goal.]
     '''
 
 def construct_parameters():
@@ -38,6 +39,13 @@ def construct_parameters():
                         metavar='',
                         help="tsv file containing 3 columns",
                         dest='filename',
+                        type=str,
+                        required=True)
+    parser.add_argument("-c",
+                        "--choice",
+                        metavar='',
+                        help="Choice between value in the first column of your file",
+                        dest='choice',
                         type=str,
                         required=True)
 
