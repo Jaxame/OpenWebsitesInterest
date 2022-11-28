@@ -15,52 +15,31 @@ def help_msg():
     """
     return '''
         To use this script, please respect the following format:
-        SequencesToSPSS.py -i reads.fasta -g genome.fasta [-t] x [-k] y
+        open_website.py -p /path/of/the/file/ -f file.txt
         
-        [-i (required): Input the fasta file containing your reads.]
-        [-g (required): Input the fasta file containing your reference genome.]
-        [-t (optional [2]): Input x = the solidity threshold you want to use.]
-        [-k (optional [31]): Input y = the k-mer size you want to use.]
-        
+        [-p (required): Path to the tsv file (with 3 columns).]
+        [-f (required): Name of the tsv file.]
     '''
 
 def construct_parameters():
     parser = argparse.ArgumentParser(
         add_help=False,
         usage=help_msg(),
-        description="Compressed representation and indexing\
-            of a set of k-mers extracted from sequencing data.")
-    parser.add_argument("-i",
-                        "--reads",
+        description="Open websites wanted with a tsv file.")
+    parser.add_argument("-p",
+                        "--path",
                         metavar='',
-                        help="fasta file containing a set of reads",
-                        dest='reads',
+                        help="Absolute path to the file",
+                        dest='path',
                         type=str,
                         required=True)
-    parser.add_argument("-g",
-                        "--genome",
+    parser.add_argument("-f",
+                        "--filename",
                         metavar='',
-                        help="fasta file containing a reference genome",
-                        dest='genome',
+                        help="tsv file containing 3 columns",
+                        dest='filename',
                         type=str,
                         required=True)
-    parser.add_argument("-t",
-                        "--solidity_threshold",
-                        metavar='',
-                        help="solidity threshold (kmers occurring less than t\
-                            times are not extracted) (default=2)",
-                        dest='solid_t',
-                        type=int,
-                        required=False,
-                        default=2)
-    parser.add_argument("-k",
-                        "--kmer_size",
-                        metavar='',
-                        help="kmer size (default=31)",
-                        dest='k_size',
-                        type=int,
-                        required=False,
-                        default=31)
 
     args = parser.parse_args()
     return args
