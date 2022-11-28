@@ -1,28 +1,25 @@
-from os.path import isfile
+from os.path import exists
 import webbrowser as wb
 
-def check_file_exists(path: str) -> bool:
-    """
-    Check if file exists with a good path
+class OpenWebsitesWithFile :
+    def __init__(self, path : str = "", filename : str = "", website_dict : dict = {}, function_website_link_dict : dict = {}):
+        self.path = path
+        self.filename = filename
+        self.website_dict = website_dict
+        self.function_website_link_dict = function_website_link_dict
 
-    Args:
-        path (str): Absolute path with name file to check
+    def check_file_exists(self, path: str, filename: str) -> bool:
+        """
+        Check if a file with its local path exists
 
-    Raises:
-        FileExistsError: Error with the path or the name of the file
+        Args:
+            path (str): local path
+            filename (str): name of the file
 
-    Returns:
-        bool: True if file exists, FileExistsError otherwise
-    """
-    if isfile(path):
-        print("The file exists")
-        return True
-    else:
-        raise FileExistsError("It's not a file, we can't open it")
-
-# TESTING check_file_exists
-print(check_file_exists("/home/jacky/projects/OpenWebsitesInterest/list_websites.txt"))
-print(check_file_exists("/home/jacky/projects/OpenWebsitesInterest/list_websites.tx"))
+        Returns:
+            bool: True if file exists, False otherwise
+        """
+        return exists(f"{path}/{filename}")
 
 # Display url using the default browser
 # url = 'https://www.codebreakthrough.com/python-bootcamp/'
