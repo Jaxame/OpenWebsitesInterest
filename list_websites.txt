@@ -15,5 +15,6 @@ job	glassdoor	https://www.glassdoor.fr/index.htm
 job	sfbi	https://www.sfbi.fr/emplois/offres-en-cours
 job	cnrs	https://emploi.cnrs.fr/RechercheAvancee.aspx
 courses	sololearn	https://www.sololearn.com/
-python	python_graph	https://www.python-graph-gallery.com/
-python	python_data_science	https://jakevdp.github.io/PythonDataScienceHandbook/
+courses	python_graph	https://www.python-graph-gallery.com/
+courses	python_data_science	https://jakevdp.github.io/PythonDataScienceHandbook/
+courses evernote    https://evernote.com/intl/fr
