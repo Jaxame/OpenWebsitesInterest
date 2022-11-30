@@ -17,4 +17,4 @@ job	cnrs	https://emploi.cnrs.fr/RechercheAvancee.aspx
 courses	sololearn	https://www.sololearn.com/
 courses	python_graph	https://www.python-graph-gallery.com/
 courses	python_data_science	https://jakevdp.github.io/PythonDataScienceHandbook/
-courses evernote    https://evernote.com/intl/fr
+courses	evernote	https://evernote.com/intl/fr
