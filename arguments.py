@@ -15,7 +15,7 @@ def help_msg():
     """
     return '''
         To use this script, please respect the following format:
-        open_website.py -p /path/of/the/file/ -f file.txt
+        open_website.py -p /path/of/the/file/ -f file.txt -c job
         
         [-p (required): Path to the tsv file (with 3 columns).]
         [-f (required): Name of the tsv file.]
